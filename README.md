@@ -32,6 +32,7 @@ This project enforces an **IAM-based tagging policy** that prevents EC2 instance
 | Place     | Pune             |
 
 ---
+```
 IAM User
    │
    ▼
@@ -47,6 +48,7 @@ EC2 Service (Launch Request)
    └── ✅ Required Tags Present
               ↓
          ALLOW EC2 Launch
+```
 ---
 👉 Flow:
 - User requests EC2 launch  
