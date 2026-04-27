@@ -32,10 +32,21 @@ This project enforces an **IAM-based tagging policy** that prevents EC2 instance
 | Place     | Pune             |
 
 ---
-IAM User → IAM Policy Enforcement → EC2 Service
-               │
-               ├── ❌ Missing Tags → DENY EC2 Launch
-               └── ✅ Required Tags Present → ALLOW EC2 Launch
+IAM User
+   │
+   ▼
+IAM Policy Enforcement
+   │
+   ▼
+EC2 Service (Launch Request)
+   │
+   ├── ❌ Missing Required Tags
+   │          ↓
+   │      DENY EC2 Launch
+   │
+   └── ✅ Required Tags Present
+              ↓
+         ALLOW EC2 Launch
 ---
 👉 Flow:
 - User requests EC2 launch  
