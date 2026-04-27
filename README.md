@@ -1,160 +1,142 @@
-# aws-ec2-tag-policy-enforcement
+# 🚀 AWS EC2 Tag Policy Enforcement
+
+![AWS](https://img.shields.io/badge/AWS-Cloud-orange)
+![IAM](https://img.shields.io/badge/IAM-Security-blue)
+![EC2](https://img.shields.io/badge/EC2-Compute-green)
+![Service](https://img.shields.io/badge/AWS-IAM%20%26%20EC2-yellow)
+![Type](https://img.shields.io/badge/Project-Cloud%20Security-purple)
+![Level](https://img.shields.io/badge/Level-Intermediate-lightgrey)
+![Status](https://img.shields.io/badge/Project-Completed-success)
+
 
 ## 📌 Project Overview
-In an enterprise AWS environment, resource tracking is critical for billing, security, and governance.  
-This project implements a Cloud Governance strategy using an IAM policy to ensure that no EC2 instance can be launched without mandatory tags.
+
+In enterprise cloud environments, maintaining proper tagging of resources is critical for:
+
+- 💰 Cost tracking
+- 🔐 Security governance
+- 📊 Resource management
+- 📑 Billing allocation
+
+This project enforces an **IAM-based tagging policy** that prevents EC2 instance creation unless mandatory tags are provided.
 
 ---
 
-## 🎯 Mandatory Tags Enforced
+## 🎯 Mandatory Tags
 
-| Tag Key   | Example Value        |
-|-----------|---------------------|
-| Name      | Pratiksha           |
-| emailID   | user@example.com    |
-| phoneNo   | 98XXXXXXXX          |
-| Place     | Pune                |
+| Tag Key   | Example Value     |
+|-----------|------------------|
+| Name      | Pratiksha        |
+| emailID   | user@example.com |
+| phoneNo   | 98XXXXXXXX       |
+| Place     | Pune             |
+
+---
+IAM User → IAM Policy Enforcement → EC2 Service
+│
+└── If tags missing → ❌ DENY instance launch
+└── If tags present → ✅ ALLOW instance launch
+---
+
+👉 Flow:
+- User requests EC2 launch  
+- IAM checks mandatory tags  
+- Policy evaluates request  
+- Decision: Allow / Deny  
 
 ---
 
-## 🛠️ IAM Enforcement Policy (JSON)
+## 🛠️ AWS Services Used
 
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "DenyEC2WithoutRequiredTags",
-      "Effect": "Deny",
-      "Action": "ec2:RunInstances",
-      "Resource": [
-        "arn:aws:ec2:*:*:instance/*",
-        "arn:aws:ec2:*:*:volume/*",
-        "arn:aws:ec2:*:*:network-interface/*"
-      ],
-      "Condition": {
-        "Null": {
-          "aws:RequestTag/Name": "true",
-          "aws:RequestTag/emailID": "true",
-          "aws:RequestTag/phoneNo": "true",
-          "aws:RequestTag/Place": "true"
-        }
-      }
-    }
-  ]
-}
-
-## 🚀 Step-by-Step Implementation
+- AWS IAM (Identity & Access Management)
+- Amazon EC2
+- AWS Policy Simulator (Conceptually)
+- JSON Policy Engine
 
 ---
 
-### 🔹 Step 1: Accessing IAM Policies
+## 🔐 IAM Policy Logic
 
-<img width="1919" height="865" alt="01_Policy_List" src="https://github.com/user-attachments/assets/e2a54958-a6f1-4cf5-944e-6e0521be5ca8" />
-
-**Explanation:**  
-Navigated to the IAM Console and initiated the **Create Policy** process.
-
----
-
-### 🔹 Step 2: Implementing JSON Logic
-
-<img width="1918" height="858" alt="02_JSON_Editor_Start" src="https://github.com/user-attachments/assets/5d2c4977-d3d7-4b64-b846-b6485caa2abd" />
-
-**Explanation:**  
-Entered the custom JSON policy script to enforce mandatory tagging requirements.
+- Uses **Explicit Deny**
+- Condition based on `aws:RequestTag`
+- Enforces all mandatory tags at launch time
 
 ---
 
-### 🔹 Step 3: Policy Finalization
+## 🚀 Implementation Steps
 
-<img width="1919" height="868" alt="Policy Finalization" src="https://github.com/user-attachments/assets/7996b314-47c8-431a-8bab-e7253f64558a" />
+### Step 1: IAM Policy Creation
+Create custom IAM policy with tag enforcement logic.
 
-**Explanation:**  
-Reviewed the policy permissions and named it **EC2-Require-Tags-Policy**.
+### Step 2: Attach Policy to User
+Attach policy to `EC2-Tag-Test-User`.
 
----
-
-### 🔹 Step 4: User & Permission Setup
-
-<img width="1919" height="867" alt="07_User_Details" src="https://github.com/user-attachments/assets/9bfbdadc-9864-41ef-b6bb-773668c4b5b0" />
-
-**Explanation:**  
-Created a test user named **EC2-Tag-Test-User** and attached:
-- AmazonEC2FullAccess (standard policy)  
-- Custom tagging enforcement policy  
+### Step 3: Login as Test User
+Validate restricted permissions.
 
 ---
 
-### 🔹 Step 5: Credential Generation
+## 🧪 Phase 2: Testing & Validation
 
-<img width="1919" height="866" alt="10_Login_Credentials" src="https://github.com/user-attachments/assets/cabfdbf0-2f3c-4a17-96ef-776c607fbb0c" />
-
-**Explanation:**  
-Generated the console sign-in URL and temporary credentials for the test user for validation testing.
-
-## 🧪 Phase 2: Testing & Validation (User Side)
-
-The following steps verify the IAM policy enforcement by logging in as the restricted user.
+### 🔹 Step 6: Login & Security
+User logs in and updates password.
 
 ---
 
-### 🔹 Step 6: Login & Security Protocol
+### 🔹 Step 7: Launch Failure (Negative Test)
 
-<img width="1919" height="1023" alt="updated test_user_pass" src="https://github.com/user-attachments/assets/4a229431-6599-4d88-8134-6278cc354d63" />
-
-**Explanation:**  
-Signed in as the test user and updated the password as per AWS security requirements.
+❌ EC2 launch blocked due to missing tags.
 
 ---
 
-### 🔹 Step 7: Verification – Launch Failure (Test Case 1)
-
-❌ **EC2 Instance Launch Failed**
-
-**Explanation:**  
-Attempted to launch an EC2 instance without adding mandatory tags.  
-The request was denied by IAM policy enforcement with an **Authorization Failure** message.
+### 🔹 Step 8: Apply Mandatory Tags
+User adds required tags during instance configuration.
 
 ---
 
-### 🔹 Step 8: Applying Mandatory Tags
+### 🔹 Step 9: Launch Success (Positive Test)
 
-<img width="1919" height="912" alt="10_Adding_Mandatory_Tags" src="https://github.com/user-attachments/assets/ba3aa76b-24ac-4e88-95d5-f98cebf4c83c" />
-
-**Explanation:**  
-Added all required tags during EC2 instance configuration:
-- Name  
-- emailID  
-- phoneNo  
-- Place  
-
----
-
-### 🔹 Step 9: Verification – Launch Success (Test Case 2)
-
-<img width="1919" height="898" alt="11_Launch_Success" src="https://github.com/user-attachments/assets/d0179a0f-8812-4243-b1e9-4360afedd1ca" />
-
-**Explanation:**  
-SUCCESS: After applying mandatory tags, the IAM policy condition was satisfied and the EC2 instance was successfully launched.
+✅ EC2 instance launched successfully after compliance.
 
 ---
 
 ## 🧠 Skills Demonstrated
 
-- AWS IAM Policy Management  
-- EC2 Instance Lifecycle Management  
-- Cloud Governance & Compliance  
-- Tag-Based Access Control (ABAC Concept)  
-- AWS Security Best Practices  
-- JSON Policy Writing  
-- Troubleshooting AWS Permission Errors  
+- AWS IAM Policy Writing
+- EC2 Instance Management
+- Cloud Security & Governance
+- Attribute-Based Access Control (ABAC)
+- JSON Policy Design
+- AWS Best Practices
+- Error Handling & Debugging
+
+---
+
+## 🎯 Real-World Use Case
+
+This type of enforcement is used in companies like:
+
+- FinTech organizations (cost control)
+- Cloud governance teams
+- DevOps automation pipelines
+- Enterprise AWS landing zones
+
+👉 Ensures **no untagged resources enter production**
+
+---
+
+## 🏁 Conclusion
+
+This project successfully demonstrates **policy-based cloud governance using AWS IAM**, ensuring strict compliance for EC2 resource tagging and improving cost visibility and security.
 
 ---
 
 ## 👤 Author
-
 **Pratiksha Lavand**  
 Master of Computer Applications (MCA)  
 Savitribai Phule Pune University  
-Aspiring Cloud & DevOps Engineer
+Aspiring Cloud & DevOps Engineer  
+
+---
+
+## 🏗️ Architecture Diagram
