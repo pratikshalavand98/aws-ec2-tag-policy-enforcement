@@ -36,7 +36,7 @@ IAM User → IAM Policy Enforcement → EC2 Service
                │
                ├── ❌ Missing Tags → DENY EC2 Launch
                └── ✅ Required Tags Present → ALLOW EC2 Launch
-
+---
 👉 Flow:
 - User requests EC2 launch  
 - IAM checks mandatory tags  
