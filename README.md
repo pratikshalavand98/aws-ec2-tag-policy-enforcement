@@ -33,10 +33,9 @@ This project enforces an **IAM-based tagging policy** that prevents EC2 instance
 
 ---
 IAM User → IAM Policy Enforcement → EC2 Service
-│
-└── If tags missing → ❌ DENY instance launch
-└── If tags present → ✅ ALLOW instance launch
----
+               │
+               ├── ❌ Missing Tags → DENY EC2 Launch
+               └── ✅ Required Tags Present → ALLOW EC2 Launch
 
 👉 Flow:
 - User requests EC2 launch  
