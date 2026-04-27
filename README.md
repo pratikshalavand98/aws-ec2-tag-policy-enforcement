@@ -183,6 +183,7 @@ This project demonstrates **AWS Cloud Governance using IAM policies**, ensuring 
 ---
 
 ## 👤 Author
-**Pratiksha Lavand**  
-MCA | Savitribai Phule Pune University  
-Aspiring Cloud & DevOps Engineer
+**Pratiksha Lavand**
+MCA | Savitribai Phule Pune University
+🚀 Cloud & DevOps Engineer (Aspiring)
+☁️ AWS | Infrastructure Automation | Cloud Security
