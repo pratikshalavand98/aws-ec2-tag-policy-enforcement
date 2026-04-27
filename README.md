@@ -111,6 +111,7 @@ IAM User → IAM Policy Enforcement → EC2 Service
 ### 🔹 Step 7: EC2 Launch Failure (Test Case 1)
 
 ❌ EC2 launch failed due to missing mandatory tags.
+<img width="1919" height="898" alt="07_API_Error_Dashboard" src="https://github.com/user-attachments/assets/6122ab4a-888d-4e3e-94b5-b167da474391" />
 
 IAM policy correctly denied the request.
 
@@ -118,7 +119,8 @@ IAM policy correctly denied the request.
 
 ### 🔹 Step 8: Applying Mandatory Tags
 
-<img width="1919" height="912" alt="10_Adding_Mandatory_Tags" src="https://github.com/user-attachments/assets/ba3aa76b-24ac-4e88-95d5-f98cebf4c83c" />
+<img width="1919" height="912" alt="10_Adding_Mandatory_Tags" src="https://github.com/user-attachments/assets/51e1190f-c523-4bb8-a99b-f55f07cf19b4" />
+
 
 ---
 
