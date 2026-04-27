@@ -46,97 +46,119 @@ IAM User → IAM Policy Enforcement → EC2 Service
 
 ---
 
-## 🛠️ AWS Services Used
 
+---
+
+## 🛠️ AWS Services Used
 - AWS IAM (Identity & Access Management)
 - Amazon EC2
-- AWS Policy Simulator (Conceptually)
 - JSON Policy Engine
 
 ---
 
 ## 🔐 IAM Policy Logic
-
-- Uses **Explicit Deny**
-- Condition based on `aws:RequestTag`
-- Enforces all mandatory tags at launch time
+- Uses Explicit Deny
+- Validates `aws:RequestTag`
+- Ensures all mandatory tags are present
+- Blocks EC2 launch if tags are missing
 
 ---
 
-## 🚀 Implementation Steps
+## 🚀 Step-by-Step Implementation
 
-### Step 1: IAM Policy Creation
-Create custom IAM policy with tag enforcement logic.
+---
 
-### Step 2: Attach Policy to User
-Attach policy to `EC2-Tag-Test-User`.
+### 🔹 Step 1: IAM Policy Creation
 
-### Step 3: Login as Test User
-Validate restricted permissions.
+<img width="1919" height="865" alt="01_Policy_List" src="https://github.com/user-attachments/assets/e2a54958-a6f1-4cf5-944e-6e0521be5ca8" />
+
+---
+
+### 🔹 Step 2: JSON Policy Setup
+
+<img width="1918" height="858" alt="02_JSON_Editor_Start" src="https://github.com/user-attachments/assets/5d2c4977-d3d7-4b64-b846-b6485caa2abd" />
+
+---
+
+### 🔹 Step 3: Policy Finalization
+
+<img width="1919" height="868" alt="Policy Finalization" src="https://github.com/user-attachments/assets/7996b314-47c8-431a-8bab-e7253f64558a" />
+
+---
+
+### 🔹 Step 4: IAM User Setup
+
+<img width="1919" height="867" alt="07_User_Details" src="https://github.com/user-attachments/assets/9bfbdadc-9864-41ef-b6bb-773668c4b5b0" />
+
+---
+
+### 🔹 Step 5: Credential Generation
+
+<img width="1919" height="866" alt="10_Login_Credentials" src="https://github.com/user-attachments/assets/cabfdbf0-2f3c-4a17-96ef-776c607fbb0c" />
 
 ---
 
 ## 🧪 Phase 2: Testing & Validation
 
-### 🔹 Step 6: Login & Security
-User logs in and updates password.
+---
+
+### 🔹 Step 6: Login & Security Setup
+
+<img width="1919" height="1023" alt="updated test_user_pass" src="https://github.com/user-attachments/assets/4a229431-6599-4d88-8134-6278cc354d63" />
 
 ---
 
-### 🔹 Step 7: Launch Failure (Negative Test)
+### 🔹 Step 7: EC2 Launch Failure (Test Case 1)
 
-❌ EC2 launch blocked due to missing tags.
+❌ EC2 launch failed due to missing mandatory tags.
 
----
-
-### 🔹 Step 8: Apply Mandatory Tags
-User adds required tags during instance configuration.
+IAM policy correctly denied the request.
 
 ---
 
-### 🔹 Step 9: Launch Success (Positive Test)
+### 🔹 Step 8: Applying Mandatory Tags
 
-✅ EC2 instance launched successfully after compliance.
+<img width="1919" height="912" alt="10_Adding_Mandatory_Tags" src="https://github.com/user-attachments/assets/ba3aa76b-24ac-4e88-95d5-f98cebf4c83c" />
+
+---
+
+### 🔹 Step 9: EC2 Launch Success (Test Case 2)
+
+<img width="1919" height="898" alt="11_Launch_Success" src="https://github.com/user-attachments/assets/d0179a0f-8812-4243-b1e9-4360afedd1ca" />
+
+✔ EC2 instance launched successfully after applying mandatory tags.
 
 ---
 
 ## 🧠 Skills Demonstrated
-
-- AWS IAM Policy Writing
-- EC2 Instance Management
-- Cloud Security & Governance
-- Attribute-Based Access Control (ABAC)
-- JSON Policy Design
-- AWS Best Practices
-- Error Handling & Debugging
+- AWS IAM Policy Writing  
+- EC2 Instance Management  
+- Cloud Security & Governance  
+- Attribute-Based Access Control (ABAC)  
+- JSON Policy Design  
+- AWS Best Practices  
+- Troubleshooting IAM Errors  
 
 ---
 
 ## 🎯 Real-World Use Case
+This type of tagging enforcement is used in:
 
-This type of enforcement is used in companies like:
+- Enterprise AWS environments  
+- FinOps (Cost Management) teams  
+- DevOps governance pipelines  
+- Cloud security compliance systems  
 
-- FinTech organizations (cost control)
-- Cloud governance teams
-- DevOps automation pipelines
-- Enterprise AWS landing zones
-
-👉 Ensures **no untagged resources enter production**
+👉 Ensures **no untagged resource enters production**
 
 ---
 
 ## 🏁 Conclusion
-
-This project successfully demonstrates **policy-based cloud governance using AWS IAM**, ensuring strict compliance for EC2 resource tagging and improving cost visibility and security.
+This project demonstrates **AWS Cloud Governance using IAM policies**, ensuring strict enforcement of mandatory EC2 tagging for security, cost control, and resource tracking.
 
 ---
 
 ## 👤 Author
 **Pratiksha Lavand**  
-Master of Computer Applications (MCA)  
-Savitribai Phule Pune University  
-Aspiring Cloud & DevOps Engineer  
-
----
-
-## 🏗️ Architecture Diagram
+MCA | Savitribai Phule Pune University  
+Aspiring Cloud & DevOps Engineer
