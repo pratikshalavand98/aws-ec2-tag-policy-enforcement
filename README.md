@@ -17,37 +17,47 @@ In enterprise cloud environments, maintaining proper tagging of resources is cri
 - 🔐 Security governance
 - 📊 Resource management
 - 📑 Billing allocation
-
+- 
+## 🎯 Objective
+- Implement AWS tagging best practices
+- Enforce mandatory tags for EC2 instance creation
+- Validate success and failure scenarios
+- Demonstrate governance and cost control
+  
 This project enforces an **IAM-based tagging policy** that prevents EC2 instance creation unless mandatory tags are provided.
 
 ---
 
 ## 🎯 Mandatory Tags
 
-| Tag Key   | Example Value     |
-|-----------|------------------|
-| Name      | Pratiksha        |
-| emailID   | user@example.com |
-| phoneNo   | 98XXXXXXXX       |
-| Place     | Pune             |
+| Tag Key | Example Value                                         |
+| ------- | ----------------------------------------------------- |
+| Name    | Pratiksha                                             |
+| emailID | [pratiksha@example.com](mailto:pratiksha@example.com) |
+| phoneNo | 9876543210                                            |
+| Place   | Pune                                                  |
+
 
 ---
 ```
-IAM User
-   │
-   ▼
-IAM Policy Enforcement
-   │
-   ▼
-EC2 Service (Launch Request)
-   │
-   ├── ❌ Missing Required Tags
-   │          ↓
-   │      DENY EC2 Launch
-   │
-   └── ✅ Required Tags Present
-              ↓
-         ALLOW EC2 Launch
+                 IAM User
+                    |
+                    v
+        AWS IAM / Tag Policy Enforcement
+                    |
+                    v
+          EC2 RunInstances Request
+                    |
+        +--------------------------+
+        |                          |
+        v                          v
+❌ Missing Required Tags     ✅ Required Tags Present
+        |                          |
+        v                          v
+  DENY Instance Launch     ALLOW Instance Launch
+        |                          |
+        v                          v
+ Error Message Display     EC2 Instance Created Successfully
 ```
 ---
 👉 Flow:
